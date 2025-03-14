@@ -1,4 +1,4 @@
-import type { ScheduleItem } from "./store.svelte"
+import type { ScheduleItem } from "./store"
 
 export const defaultSchedule: ScheduleItem[] = [
     {
