@@ -5,36 +5,45 @@
 
 	let currentSchedule = $state(Array.from($schedule));
 	let currentItem = $state(0);
-	let interval = setInterval(() => {
+
+	let interval = setInterval(step, 1000);
+	step();
+	function step() {
 		if (currentSchedule.length === 0) {
 			timeText = 'Schedule ended';
 			clearInterval(interval);
 			return;
 		}
 
-		let item = currentSchedule[0];
-
 		let now = new Date();
-		let itemDate = new Date();
-		itemDate.setHours(item.hour, item.minute, item.second);
 
-		if (now > itemDate) {
-			// remove the first item
-			currentSchedule = currentSchedule.filter((_, index) => index !== 0);
-			timeText = '';
-			currentItem += 1;
-			return;
+		while (currentSchedule.length > 0) {
+			let item = currentSchedule[0];
+			let itemDate = new Date();
+			itemDate.setHours(item.hour, item.minute, item.second);
+
+			if (now > itemDate) {
+				currentSchedule = currentSchedule.filter((_, index) => index !== 0);
+				timeText = '';
+				currentItem += 1;
+			} else {
+				break;
+			}
 		}
 
-		const diff = itemDate.getTime() - now.getTime();
-		//const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-		const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-		const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-		const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-		//const miliseconds = Math.floor((distance % 1000) / 1000);
+		if (currentSchedule.length > 0) {
+			let nextItem = currentSchedule[0];
+			let nextItemDate = new Date();
+			nextItemDate.setHours(nextItem.hour, nextItem.minute, nextItem.second);
 
-		timeText = `${hours > 0 ? (hours < 10 ? '0' + hours : hours) + ':' : ''}${minutes < 10 ? '0' + minutes : minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
-	}, 100);
+			const diff = nextItemDate.getTime() - now.getTime();
+			const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+			const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+			const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+			timeText = `${hours > 0 ? (hours < 10 ? '0' + hours : hours) + ':' : ''}${minutes < 10 ? '0' + minutes : minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
+		}
+	}
 </script>
 
 <div class="absolute left-0 top-0 flex h-screen w-full flex-col p-5 opacity-50">
