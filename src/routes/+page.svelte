@@ -14,5 +14,6 @@
 
 	<div class="flex w-full flex-row items-center justify-center gap-5">
 		<Button onclick={() => goto('/schedule')}>Open Schedule</Button>
+		<Button onclick={() => goto('/editor')}>Editor</Button>
 	</div>
 </div>

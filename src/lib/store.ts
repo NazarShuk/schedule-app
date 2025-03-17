@@ -1,5 +1,5 @@
 import { defaultSchedule } from "./schedules"
-import { writable } from "svelte/store"
+import { get, writable } from "svelte/store"
 import superjson from 'superjson';
 
 export interface ScheduleItem {
@@ -20,4 +20,8 @@ if (localStorage.getItem("schedule")) {
 else {
     schedule.set(defaultSchedule)
     localStorage.setItem("schedule", superjson.stringify(defaultSchedule))
+}
+
+export function saveSchedule() {
+    localStorage.setItem("schedule", superjson.stringify(get(schedule)))
 }
