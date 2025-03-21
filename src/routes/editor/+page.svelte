@@ -81,3 +81,9 @@
 		}}>Add item</Button
 	>
 </div>
+
+<style>
+	:global(body) {
+		overflow: auto;
+	}
+</style>

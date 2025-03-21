@@ -10,4 +10,6 @@
 	<title>Schedule</title>
 </svelte:head>
 
-{@render children()}
+<div class="h-full w-full bg-gradient-to-b from-primary/20 to-background">
+	{@render children()}
+</div>

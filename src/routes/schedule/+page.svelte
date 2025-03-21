@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { schedule } from '$lib/store';
+	import Confetti from 'svelte-confetti';
 
 	let timeText = $state('');
 
@@ -75,6 +76,12 @@
 		</h2>
 	{/if}
 </div>
+
+{#if currentSchedule.length === 0}
+	<div class="absolute left-0 top-0 flex w-full flex-col items-center justify-start">
+		<Confetti fallDistance="100vh" duration={5000} amount={200} y={[0, 0.1]} x={[-5, 5]} infinite />
+	</div>
+{/if}
 
 <style>
 	:global(body) {
