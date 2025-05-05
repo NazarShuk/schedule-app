@@ -43,6 +43,7 @@
 	},
 	"dependencies": {
 		"mode-watcher": "^0.5.1",
-		"superjson": "^2.2.2"
+		"superjson": "^2.2.2",
+		"vite-plugin-pwa": "^1.0.0"
 	}
 }
